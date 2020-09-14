@@ -33,35 +33,39 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 
 @TeleOp(name=" TeleOp Arcade", group="Linear Opmode")
 public class ArcadeOpMode extends LinearOpMode {
-    // Declare OpMode members.
+    // Declare os "membros" do seu código
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor motorEsquerda = null;
     private DcMotor motorDireita = null;
     private DcMotor motorDireitoBack = null;
     private DcMotor motorEsquerdoBack = null;
+    Servo servo1 = null;
 
     @Override
     public void runOpMode() {
         double poderEsquerda;
         double poderDireita;
+        boolean buttonA;
 
+        motorEsquerda = hardwareMap.get(DcMotor.class, "motor_Esquerda");
+        motorDireita = hardwareMap.get(DcMotor.class, "motor_Direita");
+        motorEsquerdoBack = hardwareMap.get(DcMotor.class, "motor_EsquerdoBack");
+        motorDireitoBack = hardwareMap.get(DcMotor.class, "motor_DireitoBack");
 
-        motorEsquerda = hardwareMap.get(DcMotor.class, "Motor_Esquerda");
-        motorDireita = hardwareMap.get(DcMotor.class, "Motor_Direita");
-        motorEsquerdoBack = hardwareMap.get(DcMotor.class, "Motor_EsquerdoBack");
-        motorDireitoBack = hardwareMap.get(DcMotor.class, "Motor_DireitoBack");
+        servo1 = hardwareMap.get(Servo.class, "servo_Exemplo");
 
         motorDireita.setDirection(DcMotor.Direction.REVERSE);
         motorDireitoBack.setDirection(DcMotorSimple.Direction.REVERSE);
         motorEsquerdoBack.setDirection(DcMotorSimple.Direction.FORWARD);
         motorEsquerda.setDirection(DcMotorSimple.Direction.FORWARD);
-
+        servo1.setDirection(Servo.Direction.FORWARD);
 
         waitForStart();
         runtime.reset();
@@ -70,6 +74,9 @@ public class ArcadeOpMode extends LinearOpMode {
             //Atribuindo gamepad1, lembre-se que é por loop
             double drive = -gamepad1.left_stick_y;
             double turn = gamepad1.left_stick_x;
+
+            //Atribuindo botão do gamepad a uma variável
+            buttonA = gamepad1.a;
 
             //Atribuindo valor aos power
             poderEsquerda = Range.clip(drive + turn, -1.0, 1.0);
@@ -81,6 +88,11 @@ public class ArcadeOpMode extends LinearOpMode {
             motorDireitoBack.setPower(poderDireita);
             motorEsquerdoBack.setPower(poderEsquerda);
 
+            if(buttonA) {
+                servo1.setPosition(1.0);
+            } else {
+                servo1.setPosition(0.0);
+            }
 
         }
     }

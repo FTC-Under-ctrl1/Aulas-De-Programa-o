@@ -80,7 +80,7 @@ public class ArcadeDrive extends LinearOpMode {
             max = Math.max(Math.abs(poderEsquerda), Math.abs(poderDireita));
 
             //Proporcionalidade para não ultrapassar +/- 1
-            if (max > 1) {
+            if (max > 1.0) {
                 poderEsquerda /= max;
                 poderDireita /= max;
             }

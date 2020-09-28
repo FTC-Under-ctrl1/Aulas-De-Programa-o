@@ -50,10 +50,10 @@ public class TankOpMode extends LinearOpMode {
         double poderEsquerda;
         double poderDireita;
 
-        motorEsquerda = hardwareMap.get(DcMotor.class, "Motor_Esquerda");
-        motorDireita = hardwareMap.get(DcMotor.class, "Motor_Direita");
-        motorEsquerdoBack = hardwareMap.get(DcMotor.class, "Motor_EsquerdoBack");
-        motorDireitoBack = hardwareMap.get(DcMotor.class, "Motor_DireitoBack");
+        motorEsquerda = hardwareMap.get(DcMotor.class, "motor_Esquerda");
+        motorDireita = hardwareMap.get(DcMotor.class, "motor_Direita");
+        motorEsquerdoBack = hardwareMap.get(DcMotor.class, "motor_EsquerdoBack");
+        motorDireitoBack = hardwareMap.get(DcMotor.class, "motor_DireitoBack");
 
         motorDireita.setDirection(DcMotor.Direction.REVERSE);
         motorDireitoBack.setDirection(DcMotorSimple.Direction.REVERSE);

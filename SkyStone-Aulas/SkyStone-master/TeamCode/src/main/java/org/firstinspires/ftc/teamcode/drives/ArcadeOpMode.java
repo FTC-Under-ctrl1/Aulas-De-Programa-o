@@ -27,18 +27,21 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.drives;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
 
 
-@TeleOp(name=" TeleOp TankMode", group="Linear Opmode")
-public class TankOpMode extends LinearOpMode {
-    // Declare OpMode members.
+@TeleOp(name=" TeleOp Arcade", group="Linear Opmode")
+public class ArcadeOpMode extends LinearOpMode {
+
+    // Declare os "membros" do seu código
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor motorEsquerda = null;
     private DcMotor motorDireita = null;
@@ -55,26 +58,29 @@ public class TankOpMode extends LinearOpMode {
         motorEsquerdoBack = hardwareMap.get(DcMotor.class, "motor_EsquerdoBack");
         motorDireitoBack = hardwareMap.get(DcMotor.class, "motor_DireitoBack");
 
-        motorDireita.setDirection(DcMotor.Direction.REVERSE);
+        motorDireita.setDirection(DcMotorSimple.Direction.REVERSE);
         motorDireitoBack.setDirection(DcMotorSimple.Direction.REVERSE);
         motorEsquerdoBack.setDirection(DcMotorSimple.Direction.FORWARD);
         motorEsquerda.setDirection(DcMotorSimple.Direction.FORWARD);
-
 
         waitForStart();
         runtime.reset();
 
         while (opModeIsActive()) {
-            //Atribuindo os valores
-            //Possivel mudança de sinal dependendo do robô e/ou preferência do driver.
-            poderEsquerda = -gamepad1.left_stick_y;
-            poderDireita = -gamepad1.right_stick_y;
+            //Atribuindo gamepad1, lembre-se que é por loop
+            double drive = -gamepad1.left_stick_y;
+            double turn = gamepad1.left_stick_x;
 
-            //Setando a força dos motores.
-            motorEsquerda.setPower(poderEsquerda);
-            motorEsquerdoBack.setPower(poderEsquerda);
+            //Atribuindo valor aos power
+            poderEsquerda = Range.clip(drive + turn, -1.0, 1.0);
+            poderDireita = Range.clip(drive - turn, -1.0, 1.0);
+
+            //Setando o power dos motores
             motorDireita.setPower(poderDireita);
+            motorEsquerda.setPower(poderEsquerda);
             motorDireitoBack.setPower(poderDireita);
+            motorEsquerdoBack.setPower(poderEsquerda);
+
         }
     }
 }

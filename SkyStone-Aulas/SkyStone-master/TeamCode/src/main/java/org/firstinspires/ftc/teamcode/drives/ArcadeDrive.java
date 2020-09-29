@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.drives;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -39,7 +39,7 @@ import com.qualcomm.robotcore.util.Range;
 
 @TeleOp(name=" TeleOp ArcadeDrive", group="Linear Opmode")
 public class ArcadeDrive extends LinearOpMode {
-    // Declare OpMode members.
+    //Membros do código
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor motorEsquerda = null;
     private DcMotor motorDireita = null;
@@ -52,10 +52,10 @@ public class ArcadeDrive extends LinearOpMode {
         double poderDireita;
         double max;
 
-        motorEsquerda = hardwareMap.get(DcMotor.class, "Motor_Esquerda");
-        motorDireita = hardwareMap.get(DcMotor.class, "Motor_Direita");
-        motorEsquerdoBack = hardwareMap.get(DcMotor.class, "Motor_EsquerdoBack");
-        motorDireitoBack = hardwareMap.get(DcMotor.class, "Motor_DireitoBack");
+        motorEsquerda = hardwareMap.get(DcMotor.class, "motor_Esquerda");
+        motorDireita = hardwareMap.get(DcMotor.class, "motor_Direita");
+        motorEsquerdoBack = hardwareMap.get(DcMotor.class, "motor_EsquerdoBack");
+        motorDireitoBack = hardwareMap.get(DcMotor.class, "motor_DireitoBack");
 
         motorDireita.setDirection(DcMotor.Direction.REVERSE);
         motorDireitoBack.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -90,7 +90,6 @@ public class ArcadeDrive extends LinearOpMode {
             motorEsquerda.setPower(poderEsquerda);
             motorDireitoBack.setPower(poderDireita);
             motorEsquerdoBack.setPower(poderEsquerda);
-
 
         }
     }

@@ -44,12 +44,11 @@ public class TankOpMode extends LinearOpMode {
     private DcMotor motorDireita = null;
     private DcMotor motorDireitoBack = null;
     private DcMotor motorEsquerdoBack = null;
-
     @Override
     public void runOpMode() {
         double poderEsquerda;
         double poderDireita;
-
+    
         motorEsquerda = hardwareMap.get(DcMotor.class, "motor_Esquerda");
         motorDireita = hardwareMap.get(DcMotor.class, "motor_Direita");
         motorEsquerdoBack = hardwareMap.get(DcMotor.class, "motor_EsquerdoBack");
@@ -59,7 +58,6 @@ public class TankOpMode extends LinearOpMode {
         motorDireitoBack.setDirection(DcMotorSimple.Direction.REVERSE);
         motorEsquerdoBack.setDirection(DcMotorSimple.Direction.FORWARD);
         motorEsquerda.setDirection(DcMotorSimple.Direction.FORWARD);
-
 
         waitForStart();
         runtime.reset();
@@ -75,6 +73,7 @@ public class TankOpMode extends LinearOpMode {
             motorEsquerdoBack.setPower(poderEsquerda);
             motorDireita.setPower(poderDireita);
             motorDireitoBack.setPower(poderDireita);
+
         }
     }
 }
